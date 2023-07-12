@@ -1,0 +1,42 @@
+// build docker comtainer
+
+docker build -t Movies-node .
+
+// run build container
+
+docker run --name Movie -d -rm -p 3000:3000 Movies-node 
+
+// check running container 
+
+docker ps
+
+// inspect container 
+
+docker inspect Movie-node
+
+// stop docker container 
+
+docker stop Movies-node
+
+// remove docker container
+
+docker container prune 
+
+// remove docker images
+
+docker system prune -a
+
+// create networks container
+
+docker network create movies-node-fab
+
+// list all docker networks 
+
+docker network ls
+
+// run other container under the network
+
+docker run -d --name mongodb --network movies-node-fab mongo
+
+docker run --name fab-movies --network movies-node-fab -d -rm -p 3000:3000 Movie-node
+
